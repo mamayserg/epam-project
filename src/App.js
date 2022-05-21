@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import {useInput} from './hooks/use-input';
+import Input from './components/Input';
+import Button from './components/Button';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function App(){
+const defaultText = "";
+const defaultColor = '#ffffff'
+
+const [textProps, resetText] = useInput(defaultText);
+const [colorProps, resetColor] = useInput(defaultColor);
+
+const submit = (e) =>{
+e.preventDefault()
+
+resetColor(defaultColor);
+resetText(defaultText);
+
 }
+
+return(<>
+<form onSubmit={submit}>
+<Input value={colorProps.value} onChange={colorProps.onChange} type='color' />
+<Input value={textProps.value} onChange={textProps.onChange} type='text' />
+<Button type="submit"text="Add"/>
+</form>
+ </>)
+}
+
 
 export default App;
