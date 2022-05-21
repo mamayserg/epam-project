@@ -1,6 +1,7 @@
 import {useInput} from './hooks/use-input';
 import Input from './components/Input';
 import Button from './components/Button';
+import Title from './components/Title';
 
 function App(){
 const defaultText = "";
@@ -18,6 +19,7 @@ resetText(defaultText);
 }
 
 return(<>
+<Title title="input text and color" />
 <form onSubmit={submit}>
 <Input value={colorProps.value} onChange={colorProps.onChange} type='color' />
 <Input value={textProps.value} onChange={textProps.onChange} type='text' />
