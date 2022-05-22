@@ -1,33 +1,22 @@
-import {useInput} from './hooks/use-input';
-import Input from './components/Input';
-import Button from './components/Button';
+import { Route, Routes, Navigate } from "react-router-dom";
+import SearchPage from "./pages/SearchPage";
+import ErrorPage from "./pages/errorPage/ErrorPage";
+import SearchCard from "./components/searchCard/SearchCard";
+import SelectedMovieCard from "./components/selectedMovieCard/SelectedMovieCard";
 
-function App(){
-const defaultText = "";
-const defaultColor = '#ffffff'
-
-const [textProps, resetText] = useInput(defaultText);
-const [colorProps, resetColor] = useInput(defaultColor);
-
-const submit = (e) =>{
-e.preventDefault()
-
-resetColor(defaultColor);
-resetText(defaultText);
-
+function App() {
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Navigate to="/search" replace />} />
+        <Route path="/search" element={<SearchPage />}>
+          <Route path="" element={<SearchCard />} />
+          <Route path=":id" element={<SelectedMovieCard />} />
+        </Route>
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
+    </>
+  );
 }
-
-return(<>
- <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-<form onSubmit={submit}>
-<Input value={colorProps.value} onChange={colorProps.onChange} type='color' />
-<Input value={textProps.value} onChange={textProps.onChange} type='text' />
-<Button type="submit"text="Add"/>
-</form>
- </>)
-}
-
 
 export default App;
