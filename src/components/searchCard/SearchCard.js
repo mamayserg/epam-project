@@ -9,9 +9,9 @@ const SearchCard = () => (
       <Header />
       <div className="flex justify-center w-full mt-6 mb-24 search-card--bar">
         <div className="flex flex-col items-start w-3/6">
-          <h1 className="title text-white pb-8">FIND YOUR MOVIE</h1>
+          <h1 className="title text-white pb-8 uppercase">Find your movie</h1>
           <ErrorBoundary key="ErrorBoundary">
-            <SearchBar  key="dddErrorBoundary"/>
+            <SearchBar key="dddErrorBoundary" />
           </ErrorBoundary>
         </div>
       </div>

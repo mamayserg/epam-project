@@ -1,7 +1,7 @@
 .movies-list {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-grid-gap: 40px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 40px;
 }
 .movie-item {
   height: 580px;

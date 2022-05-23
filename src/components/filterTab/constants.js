@@ -36,18 +36,19 @@ export const tabs = [
   },
 ];
 
-export const sortBy = [  {
-  name: "RELEASE NANE",
-  path: {
-    pathname: "/search",
-    hash: "#horrot",
+export const sortBy = [
+  {
+    name: "RELEASE NANE",
+    path: {
+      pathname: "/search",
+      hash: "#horrot",
+    },
   },
-},
-{
-  name: "NAME",
-  path: {
-    pathname: "/search",
-    hash: "#crime",
+  {
+    name: "NAME",
+    path: {
+      pathname: "/search",
+      hash: "#crime",
+    },
   },
-},
 ];

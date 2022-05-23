@@ -10,7 +10,7 @@ const SearchPage = () => (
     <div className="bg-gray-500 mt-2 h-max px-10 py-1">
       <FilterTab />
       <MoviesFound />
-      <MoviesList/>
+      <MoviesList />
     </div>
     <Footer />
   </div>
