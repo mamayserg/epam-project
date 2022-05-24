@@ -1,24 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes, Navigate } from "react-router-dom";
+import SearchPage from "./pages/SearchPage";
+import ErrorPage from "./pages/errorPage/ErrorPage";
+import SearchCard from "./components/searchCard/SearchCard";
+import SelectedMovieCard from "./components/selectedMovieCard/SelectedMovieCard";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<Navigate to="/search" replace />} />
+        <Route path="/search" element={<SearchPage />}>
+          <Route path="" element={<SearchCard />} />
+          <Route path=":id" element={<SelectedMovieCard />} />
+        </Route>
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
+    </>
   );
 }
 
