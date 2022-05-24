@@ -11,7 +11,7 @@ const SearchCard = () => (
         <div className="flex flex-col items-start w-3/6">
           <h1 className="title text-white pb-8 uppercase">Find your movie</h1>
           <ErrorBoundary key="ErrorBoundary">
-            <SearchBar key="dddErrorBoundary" />
+            <SearchBar key="SearchBar" />
           </ErrorBoundary>
         </div>
       </div>
