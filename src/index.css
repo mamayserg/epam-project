@@ -18,8 +18,13 @@ code {
 }
 
 .title {
-  font-weight: 300;
-  font-size: 40px;
+  font-weight: 300 !important;
+  font-size: 40px !important;
+}
+
+.subtitle {
+  font-weight: 300 !important;
+  font-size: 20px !important;
 }
 
 .selected-movie-card {

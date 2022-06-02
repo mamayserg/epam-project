@@ -1,7 +1,7 @@
 import TabItem from "./TabItem";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { tabs } from "./constants";
-import { TiArrowSortedDown } from "react-icons/ti";
+import SortMoviesSelect from "./SortMoviesSelect";
 
 const FilterTab = () => {
   let location = useLocation();
@@ -20,11 +20,9 @@ const FilterTab = () => {
           ))}
         </li>
       </ul>
-      <div className="py-4 flex flex-row">
-        <span className="text-gray-100 mr-4">SORT BY</span>
-        <Link to="" className="flex flex-row">
-          RELEASE DATE <TiArrowSortedDown className="pl-1" />
-        </Link>
+      <div className=" flex flex-row">
+        <span className="text-gray-100 mr-4 uppercase py-4">Sort by</span>
+        <SortMoviesSelect/>
       </div>
     </div>
   );

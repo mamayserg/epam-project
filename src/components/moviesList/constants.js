@@ -29,6 +29,6 @@ export const movies = [
     name: "Smash",
     year: "1989",
     genre: "Comedy",
-    id: 100,
+    id: 150,
   },
 ];
