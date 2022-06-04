@@ -30,3 +30,13 @@ code {
 .selected-movie-card {
   height: 270px;
 }
+
+.input-field input, .input-field .MuiSelect-select {
+
+  background: #424242 !important;
+}
+
+.input-field label{
+  color: #F65261 !important;
+  text-transform: uppercase !important;
+}

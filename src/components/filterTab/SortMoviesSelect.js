@@ -3,6 +3,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { sortMovieBy } from './constants'
+import './sortMovieSelect.css'
 // import { useLocation } from "react-router-dom";
 
 export default function SortMoviesSelect() {
@@ -15,7 +16,7 @@ export default function SortMoviesSelect() {
   };
 
   return (
-    <div className="pt-3">
+    <div className="pt-1">
       <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }} size="small">
         <Select
         labelId="demo-simple-select-standard-label"
