@@ -34,7 +34,7 @@ export default function DeleteMovieDialog({ handleClose, open, id }) {
         <Button
           onClick={handleClose}
           variant="contained"
-          className="mb-4 text-white bg-red-100 uppercase font-light"
+          className="mb-4 text-white bg-red-100 uppercase font-light w-36"
         >
           Confirm
         </Button>

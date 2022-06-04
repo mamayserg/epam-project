@@ -3,6 +3,7 @@ import NetflixLogo from "./NetflixLogo";
 import { Link } from "react-router-dom";
 import { VscSearch } from "react-icons/vsc";
 import CreateEditMovieDialog from "../dialogs/CreateEditMovieDialog";
+import { defaultMovie } from "../dialogs/constants";
 
 const Header = ({ isMovieCard }) => {
   const [open, setOpen] = useState(false);
@@ -31,7 +32,7 @@ const Header = ({ isMovieCard }) => {
           </button>
         )}
       </div>
-      <CreateEditMovieDialog handleClose={handleClose} open={open}  />
+      <CreateEditMovieDialog handleClose={handleClose} open={open} selectedMovie={defaultMovie} />
     </header>
   );
 };

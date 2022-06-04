@@ -4,6 +4,17 @@ import MenuItem from "@mui/material/MenuItem";
 import CreateEditMovieDialog from "../dialogs/CreateEditMovieDialog";
 import DeleteMovieDialog from "../dialogs/DeleteMovieDialog";
 
+const mockMovie = {
+  id: 5926,
+  title: "feshinTV",
+  muvie_url: "http//sdvs6dv/sfsvsv",
+  genre: "crime",
+  release_date: "05/28/1989",
+  ruting: 85,
+  runtime: "test run time",
+  overview: "overview to long ",
+};
+
 export default function MovieItemMenu({ isOpen, id, anchorEl, handleClose }) {
   const [openEdit, setOpenEdit] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
@@ -42,14 +53,14 @@ export default function MovieItemMenu({ isOpen, id, anchorEl, handleClose }) {
           setOpenEdit(false);
         }}
         open={openEdit}
-        id={id}
+        selectedMovie={mockMovie}
       />
       <DeleteMovieDialog
         handleClose={() => {
           setOpenDelete(false);
         }}
         open={openDelete}
-        id={id}
+        id={mockMovie.id}
       />
     </>
   );
