@@ -1,33 +1,35 @@
-import { useState } from "react";
 import MovieGenre from "./MovieGenre";
 import MovieName from "./MovieName";
 import MovieYear from "./MovieYear";
 import MovieItemMenu from "./MovieItemMenu";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const MovieItem = ({ movie }) => {
-  const [open, setOpenMenu] = useState(false);
-  const [anchorEl, setAnchorEl] = useState(null);
+  const navigate = useNavigate();
+  let { id } = useParams();
 
-  const openMenu = (event) => {
-    setOpenMenu((prevState) => {
-      return prevState !== movie.id ? movie.id : false;
-    });
-    setAnchorEl(event.currentTarget);
+  const openSelectedMovie = () => {
+    if (String(id) !== String(movie.id)) {
+      navigate(`/search/${movie.id}`);
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
   };
 
-  const handleClose  = () => {
-    setAnchorEl(null)
-  };
   return (
     <div
       className="movie-item relative cursor-pointer"
-      onClick={openMenu}
+      onClick={openSelectedMovie}
     >
-      <MovieItemMenu isOpen={open} id={movie.id} anchorEl={anchorEl} handleClose={handleClose} />
+      <MovieItemMenu movie={movie} />
       <img src={require(`../../images/film.jpg`)} alt="film" />
       <div className="flex flex-row align-top justify-between mt-3">
         <div className="flex flex-col">
-          <MovieName name={movie.name} />
+          <MovieName name={movie.title} />
           <MovieGenre genre={movie.genre} />
         </div>
         <div>
