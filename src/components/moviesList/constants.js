@@ -1,7 +1,7 @@
 export const movies = [
   {
     id: 5926,
-    title: "feshinTV",
+    title: "feshin on TV",
     muvie_url: "http//sdvs6dv/sfsvsv",
     genre: "crime",
     release_date: "05/04/2022",
@@ -12,9 +12,9 @@ export const movies = [
   },
   {
     id: 26,
-    title: "Smash",
+    title: "Mask on face",
     muvie_url: "http//sdvs6dv/sfsvsv",
-    genre: "trailer",
+    genre: "horror",
     release_date: "08/08/1989",
     year: "1989",
     ruting: 85,
