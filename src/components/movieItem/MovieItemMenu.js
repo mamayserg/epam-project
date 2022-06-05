@@ -1,10 +1,21 @@
-import { useState } from "react";
+
+import React, { useState } from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import CreateEditMovieDialog from "../dialogs/CreateEditMovieDialog";
 import DeleteMovieDialog from "../dialogs/DeleteMovieDialog";
 import IconButton from "@mui/material/IconButton";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import CloseIcon from "@mui/icons-material/Close";
+import ListItem from "@mui/material/ListItem";
+
+const IgnoreDisabledListItem = React.forwardRef(function IgnoreDisabledListItem(
+  { disabled, ...other },
+  ref
+) {
+  return <ListItem {...other} ref={ref} />;
+});
+
 
 export default function MovieItemMenu({ movie }) {
   const [openEdit, setOpenEdit] = useState(false);
@@ -62,6 +73,22 @@ export default function MovieItemMenu({ movie }) {
           horizontal: "right",
         }}
       >
+                <IgnoreDisabledListItem disabled>
+
+         <IconButton
+          aria-label="close"
+          onClick={handleClose}
+          sx={{
+            position: "absolute",
+            right: 0,
+            top: -10,
+            color: "white",
+          }}
+        >
+          <CloseIcon fontSize="small" />
+        </IconButton>
+        </IgnoreDisabledListItem>
+
         <MenuItem onClick={handleEdit}>
           <span className="text-xs text-white font-light w-20">Edit</span>
         </MenuItem>
