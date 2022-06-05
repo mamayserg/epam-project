@@ -1,8 +1,18 @@
+import { useInput } from "../../hooks/use-input";
+
 const SearchBar = () => {
+  // custom hooks =>
+  const [textProps, resetText] = useInput('');
+
+  const search = () =>{
+    // fetch 
+    resetText('');
+    }
+
   return (
     <div className="flex flex-row w-full">
-      <input className="w-full  bg-gray-500 text-white" />
-      <button className="uppercase w-40 mr-4 py-2 text-base text-white bg-red-100  hover:bg-opacity-80 ">
+      <input className="w-full  bg-gray-500 text-white" {...textProps} />
+      <button className="uppercase w-40 mr-4 py-2 text-base text-white bg-red-100  hover:bg-opacity-80 " onClick={search}>
         Search
       </button>
     </div>
