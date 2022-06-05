@@ -12,10 +12,10 @@ export const defaultMovie = {
 
 export const validationSchema = yup.object({
   title: yup.string("Enter movie title").required("Title is required"),
-  muvie_url: yup
-  .string("Enter movie URL")
-  .min(8, "Password should be of minimum 8 characters length")
-  .required("Movie URL is required"),
+    muvie_url: yup
+    .string("Enter movie URL")
+    .min(8, "Password should be of minimum 8 characters length")
+    .required("Movie URL is required"),
   genre: yup.string("Enter movie genre").required("Genre is required"),
   ruting: yup
     .number("Enter movie ruting as a number")

@@ -152,6 +152,7 @@ const CreateEditMovieDialog = withEditableMovie(
                 <div>
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DatePicker
+                      inputFormat="dd.MM.yyyy"
                       id="release_date"
                       label="Release date"
                       value={release_date}

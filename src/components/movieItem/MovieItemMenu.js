@@ -9,7 +9,7 @@ const mockMovie = {
   title: "feshinTV",
   muvie_url: "http//sdvs6dv/sfsvsv",
   genre: "crime",
-  release_date: "05/28/1989",
+  release_date: "28/08/1989",
   ruting: 85,
   runtime: "test run time",
   overview: "overview to long ",
