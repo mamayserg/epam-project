@@ -38,8 +38,9 @@ export default function MovieItemMenu({ movie }) {
     event.stopPropagation();
   };
 
-  const handleClose = () => {
+  const handleClose = (e) => {
     setAnchorEl(null);
+    e.stopPropagation();
   };
 
   return (
