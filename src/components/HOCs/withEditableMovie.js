@@ -13,8 +13,8 @@ export const withEditableMovie = (Component) => {
       setMovie({ ...movie, ...changes });
     };
 
-    const onSaveMovie = () => {
-      console.log("Saved movieId", movie);
+    const onSaveMovie = (validatedMovie) => {
+      console.log("Saved movieId", validatedMovie);
     };
     const onResetMovie = () => {
       setMovie(originalMovie);
