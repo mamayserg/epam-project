@@ -18,10 +18,36 @@ code {
 }
 
 .title {
-  font-weight: 300;
-  font-size: 40px;
+  font-weight: 300 !important;
+  font-size: 40px !important;
+}
+
+.subtitle {
+  font-weight: 300 !important;
+  font-size: 20px !important;
 }
 
 .selected-movie-card {
   height: 270px;
+}
+
+.input-field input, .input-field .MuiSelect-select {
+
+  background: #424242 !important;
+  font-size: 14px;
+  font-weight: 300 !important;
+  padding-left: 5px;
+  height: 25px !important;
+}
+
+.input-field label{
+  color: #F65261 !important;
+  text-transform: uppercase !important;
+  font-size: 14px;
+
+}
+
+.input-field .MuiInputBase-root.MuiInput-root{
+padding-right: 10px;
+background: #424242 !important;
 }

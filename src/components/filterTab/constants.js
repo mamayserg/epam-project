@@ -36,19 +36,13 @@ export const tabs = [
   },
 ];
 
-export const sortBy = [
+export const sortMovieBy = [
   {
-    name: "RELEASE NANE",
-    path: {
-      pathname: "/search",
-      hash: "#horrot",
-    },
+    name: "RELEASE NAME",
+    value: "realise_name"
   },
   {
     name: "NAME",
-    path: {
-      pathname: "/search",
-      hash: "#crime",
-    },
+    value: "name"
   },
 ];
