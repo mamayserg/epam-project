@@ -1,12 +1,28 @@
 import MovieItem from "../movieItem/MovieItem";
-import { movies } from "./constants";
 import "./moviesList.css";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useCallback } from "react";
 
-const MoviesList = () => {
+const MoviesList = ({movies}) => {
+  const navigate = useNavigate();
+  let { id } = useParams();
+
+  const openSelectedMovie = useCallback((movie) => {
+    if (String(id) !== String(movie.id)) {
+      navigate(`/search/${movie.id}`);
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
+  },[id, navigate]);
+
   return (
     <div className="movies-list">
       {movies.map((item) => (
-        <MovieItem movie={item} key={item.id} />
+        <MovieItem movie={item} key={item.id} onClickComponent={openSelectedMovie} />
       ))}
     </div>
   );
