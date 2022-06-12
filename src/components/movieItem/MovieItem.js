@@ -2,28 +2,14 @@ import MovieGenre from "./MovieGenre";
 import MovieName from "./MovieName";
 import MovieYear from "./MovieYear";
 import MovieItemMenu from "./MovieItemMenu";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
 
-const MovieItem = ({ movie }) => {
-  const navigate = useNavigate();
-  let { id } = useParams();
-
-  const openSelectedMovie = () => {
-    if (String(id) !== String(movie.id)) {
-      navigate(`/search/${movie.id}`);
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "smooth",
-      });
-    }
-  };
+const MovieItem = ({ movie, onClickComponent}) => {
+  const onClick = () => onClickComponent(movie);
 
   return (
     <div
       className="movie-item relative cursor-pointer"
-      onClick={openSelectedMovie}
+      onClick={onClick}
     >
       <MovieItemMenu movie={movie} />
       <img src={require(`../../images/film.jpg`)} alt="film" />
