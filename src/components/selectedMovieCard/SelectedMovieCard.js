@@ -13,7 +13,7 @@ const SelectedMovieCard = () => (
       />
       <div className="flex flex-col items-start">
         <h1 className="title text-white pb-2 uppercase "> The Card Counter</h1>
-        <MovieGenre genre="Trailer & Comedy" />
+        <MovieGenre genre={['crime' , 'horror']} />
       </div>
     </div>
   </div>

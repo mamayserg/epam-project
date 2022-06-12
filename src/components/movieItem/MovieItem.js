@@ -33,7 +33,7 @@ const MovieItem = ({ movie }) => {
           <MovieGenre genre={movie.genre} />
         </div>
         <div>
-          <MovieYear year={movie.year} />
+          <MovieYear date={movie.release_date} />
         </div>
       </div>
     </div>
