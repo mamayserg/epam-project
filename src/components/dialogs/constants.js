@@ -20,7 +20,7 @@ export const validationSchema = yup.object({
   ruting: yup
     .number("Enter movie ruting as a number")
     .required("Genre is required"),
-  runtime: yup.string("Enter movie Runtime").required("Runtime is required"),
+  runtime: yup.number("Enter movie Runtime").required("Runtime is required"),
 });
 
 // release_date: yup

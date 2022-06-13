@@ -1,9 +1,9 @@
-import { genreNames } from "../constants/genre"
+// import { genreNames } from "../constants/genre"
 
-export const getGenreNames = (genre = []) => {
- const joinString = (genre.length ===1 && '') || (genre.length ===2 &&' & ') || ', ';
+export const getGenreNames = (genres = []) => {
+ const joinString = (genres.length ===1 && '') || (genres.length ===2 &&' & ') || ', ';
  
-  const names = genre.map((item) => genreNames[item])
+  // const names = genre.map((item) => genreNames[item])
  
-    return names.join(joinString)
+    return genres.join(joinString)
 }
