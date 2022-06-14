@@ -1,48 +1,17 @@
-export const tabs = [
+export const allTab = [
   {
     name: "ALL",
-    path: {
-      pathname: "/search",
-      hash: "",
-    },
-  },
-  {
-    name: "DOCUMENTARY",
-    path: {
-      pathname: "/search",
-      hash: "#documentary",
-    },
-  },
-  {
-    name: "COMEDY",
-    path: {
-      pathname: "/search",
-      hash: "#comedy",
-    },
-  },
-  {
-    name: "HORROR",
-    path: {
-      pathname: "/search",
-      hash: "#horrot",
-    },
-  },
-  {
-    name: "CRIME",
-    path: {
-      pathname: "/search",
-      hash: "#crime",
-    },
-  },
+    value: ""
+  }
 ];
 
 export const sortMovieBy = [
   {
-    name: "RELEASE NAME",
-    value: "realise_name"
+    name: "RELEASE DATE",
+    value: "release_date"
   },
   {
-    name: "NAME",
-    value: "name"
+    name: "RATING",
+    value: "vote_average"
   },
 ];

@@ -13,11 +13,11 @@ const MovieItem = ({ movie, onClickComponent, isLoading}) => {
     <Skeleton animation="wave" height={10} width="80%" />
   </div>):
 (<div
-  className="movie-item relative cursor-pointer"
+  className="movie-item flex justify-between flex-col relative cursor-pointer"
   onClick={onClick}
 >
   <MovieItemMenu movie={movie} />
-  <img src={`${movie.poster_path}`} alt="film" />
+  <img className="movie-item-img" src={`${movie.poster_path}`} alt="film" />
   <div className="flex flex-row align-top justify-between mt-3">
     <div className="flex flex-col">
       <MovieName name={movie.title} />

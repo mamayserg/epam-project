@@ -1,4 +1,5 @@
 import { fetchBaseQuery, createApi } from "@reduxjs/toolkit/query/react";
+// import { queryParamsKeys } from "../constants/searchParams";
 
 export const apiSlice = createApi({
   reducerPath: 'api',
@@ -8,8 +9,11 @@ export const apiSlice = createApi({
   tagTypes: "movies",
   endpoints: (build) => ({
     getMovies: build.query({
-      query: () => {
-        return {url: 'movies'}
+      query: (params) => {
+        return {
+        url: `movies`,
+        params: params,
+      }
       },
       transformResponse: (resp) =>{
         return resp
@@ -60,7 +64,7 @@ export const apiSlice = createApi({
 });
 
 export const {
-   useGetMoviesQuery,
+    useGetMoviesQuery,
     useGetMovieQuery, 
     useDeleteMovieMutation,
     useCreateMovieMutation,

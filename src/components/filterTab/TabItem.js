@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
+import { queryParamsKeys } from "../../constants/searchParams"; 
 
-const TabItem = ({ path, name, active }) => (
+const TabItem = ({ name, active, query, searchBy }) => (
   <Link
-    to={path}
-    className={`inline-block p-4 rounded-t-lg border-b-2 border-transparent 
+    to={`/search?${queryParamsKeys.SEARCH_BY}=${searchBy}&${queryParamsKeys.SEARCH}=${query}`}
+    className={`inline-block p-4 rounded-t-lg border-b-2 border-transparent uppercase
              hover:text-gray-100 hover:border-gray-400 ${
                active && "border-red-100 active"
              }`}
