@@ -4,10 +4,8 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { sortMovieBy } from './constants'
 import './sortMovieSelect.css'
-// import { useLocation } from "react-router-dom";
 
 export default function SortMoviesSelect() {
-  // let location = useLocation();
 
   const [value, setValue] = React.useState('');
 
