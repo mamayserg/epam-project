@@ -21,6 +21,10 @@ export const sortBy = [
     name: "Name",
     value: "title"
   },
+  {
+    name: "Rating",
+    value: "vote_average"
+  }
 ];
 
 export const sortOrder = {

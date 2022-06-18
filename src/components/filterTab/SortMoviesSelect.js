@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
 
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -10,24 +9,33 @@ import {
   sortOrder,
 } from "../../constants/searchParams";
 import "./sortMovieSelect.css";
+import { useQueryParam } from "../../hooks/use-query-param";
 
 export default function SortMoviesSelect() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [sortByParam, setSortByParam, allQueryParams] = useQueryParam(
+    queryParamsKeys.SORT_BY
+  );
+  const [sortOrderParam ] = useQueryParam(
+    queryParamsKeys.SORT_ORDER
+  );
 
   const [value, setValue] = useState("");
  
-  useEffect(() => {
-    const sortOrderQuery = searchParams.get(queryParamsKeys.SORT_ORDER);
-    const sortByQuery = searchParams.get(queryParamsKeys.SORT_BY);
-  
-    if (sortByQuery && sortOrderQuery) {
-      setValue(sortByQuery);
+  useEffect(() => {  
+    if (sortByParam && sortOrderParam) {
+      setValue(sortByParam);
     }
-  }, [searchParams]);
+    // eslint-disable-next-line
+  }, []);
 
   const handleChange = (event) => {
     setValue(event.target.value);
-    setSearchParams({ [queryParamsKeys.SORT_BY]: event.target.value, [queryParamsKeys.SORT_ORDER]: sortOrder.ASC})
+
+    const queryParams = {
+      ...allQueryParams,
+      [queryParamsKeys.SORT_ORDER]: sortOrder.ASC,
+    };
+    setSortByParam(event.target.value, queryParams )
   };
 
   return (

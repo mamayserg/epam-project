@@ -3,25 +3,31 @@ import {
   queryParamsKeys,
   queryParamsValues,
 } from "../../constants/searchParams";
-import { useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
+import { useQueryParam } from "../../hooks/use-query-param";
 
 const SearchBar = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  // custom hooks =>
+  const [searchParam, setSearchParam, allQueryParams] = useQueryParam(
+    queryParamsKeys.SEARCH
+  );
+  let [searchByParam] = useQueryParam(queryParamsKeys.SEARCH_BY);
+
   const [textProps, resetText] = useInput("");
 
   useEffect(() => {
-    const searchQuery = searchParams.get(queryParamsKeys.SEARCH);
-    const searchByQuery = searchParams.get(queryParamsKeys.SEARCH_BY);
-    if (searchByQuery === queryParamsValues.TITLE && searchQuery) {
+    const searchQuery = searchParam;
+    if (searchByParam === queryParamsValues.TITLE && searchParam) {
       resetText(searchQuery);
     }
     // eslint-disable-next-line
   }, []);
 
   const search = () => {
-    setSearchParams({ [queryParamsKeys.SEARCH_BY]: queryParamsValues.TITLE, [queryParamsKeys.SEARCH]: textProps.value })
+    const queryParams = {
+      ...allQueryParams,
+      [queryParamsKeys.SEARCH_BY]: queryParamsValues.TITLE,
+    };
+    setSearchParam(textProps.value, queryParams);
   };
 
   return (
