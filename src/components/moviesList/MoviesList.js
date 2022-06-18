@@ -17,7 +17,8 @@ const MoviesList = ({movies, isLoading}) => {
         behavior: "smooth",
       });
     }
-  },[id, navigate]);
+   // eslint-disable-next-line
+  },[movies]);
 
   return (
      <div className="movies-list">
