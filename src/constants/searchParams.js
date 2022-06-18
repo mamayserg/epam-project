@@ -11,3 +11,19 @@ export const queryParamsValues = {
   DESC: "desc",
   ASC: "asc"
 }
+
+export const sortBy = [
+  {
+    name: "Release date",
+    value: "release_date"
+  },
+  {
+    name: "Name",
+    value: "title"
+  },
+];
+
+export const sortOrder = {
+  ASC: 'asc',
+  DESC: 'desc'
+}

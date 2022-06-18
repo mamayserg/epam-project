@@ -1,5 +1,4 @@
 import { useInput } from "../../hooks/use-input";
-import { useNavigate } from "react-router-dom";
 import {
   queryParamsKeys,
   queryParamsValues,
@@ -8,24 +7,21 @@ import { useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 
 const SearchBar = () => {
-  const [searchParams] = useSearchParams();
-  let navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   // custom hooks =>
   const [textProps, resetText] = useInput("");
 
   useEffect(() => {
-    const search = searchParams.get(queryParamsKeys.SEARCH);
-    const searchBy = searchParams.get(queryParamsKeys.SEARCH_BY);
-    if (searchBy === queryParamsValues.TITLE && search) {
-      resetText(search);
+    const searchQuery = searchParams.get(queryParamsKeys.SEARCH);
+    const searchByQuery = searchParams.get(queryParamsKeys.SEARCH_BY);
+    if (searchByQuery === queryParamsValues.TITLE && searchQuery) {
+      resetText(searchQuery);
     }
-    // eslint-disable-next-line 
-  }, [ searchParams]);
+    // eslint-disable-next-line
+  }, []);
 
   const search = () => {
-    navigate(
-      `/search?${queryParamsKeys.SEARCH_BY}=${queryParamsValues.TITLE}&${queryParamsKeys.SEARCH}=${textProps.value}`
-    );
+    setSearchParams({ [queryParamsKeys.SEARCH_BY]: queryParamsValues.TITLE, [queryParamsKeys.SEARCH]: textProps.value })
   };
 
   return (

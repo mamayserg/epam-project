@@ -15,9 +15,14 @@ const SearchPage = () =>{
   useEffect(() => {
     const search = searchParams.get(queryParamsKeys.SEARCH);
     const searchBy = searchParams.get(queryParamsKeys.SEARCH_BY);
+    const sortBy = searchParams.get(queryParamsKeys.SORT_BY);
+    const sortOrder = searchParams.get(queryParamsKeys.SORT_ORDER);
+
     let params = {
       [queryParamsKeys.SEARCH]: search,
-      [queryParamsKeys.SEARCH_BY]: searchBy
+      [queryParamsKeys.SEARCH_BY]: searchBy,
+      [queryParamsKeys.SORT_BY]: sortBy,
+      [queryParamsKeys.SORT_ORDER]: sortOrder
     };
 
     setQueryParams(params);
