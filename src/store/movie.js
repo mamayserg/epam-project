@@ -1,8 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import { movies } from "../constants/movies"
 
 const initialState = {
-  moviesList: movies,
+  moviesList: [],
   search: ''
 }
 
@@ -13,11 +12,15 @@ const movieSlise = createSlice({
   initialState,
   reducers: {
   addMovie: (state, action) => {
-    state.moviesList.push({...action.payload, id: 8946})
+    state.moviesList.push(action.payload)
   },
   setSearch: (state , action) =>{
     state.search = action.payload
   },
+  setMoviesList: (state , action) =>{
+    state.moviesList = action.payload
+  },
+  
   
 },
 
