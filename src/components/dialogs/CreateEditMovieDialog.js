@@ -56,39 +56,53 @@ const CreateEditMovieDialog = withEditableMovie(
       {
         isLoading: createIsLoading,
         isSuccess: createIsSuccess,
-        error: createError,
+        isError: createError,
+        isUninitialized: createIsUninitialized,
       },
     ] = useCreateMovieMutation();
     const [
       editMovie,
-      { isLoading: editIsLoading, isSuccess: editIsSuccess, error: editError },
+      {
+        isLoading: editIsLoading,
+        isSuccess: editIsSuccess,
+        isError: editError,
+        isUninitialized: editIsUninitialized,
+      },
     ] = useEditMovieMutation();
 
     const handleChildClick = (e) => {
       e.stopPropagation();
     };
 
-    const onCreateMovie = async (movie) => {
-      await createMovie(movie);
-      console.log("object :>> ", createIsSuccess, createIsLoading);
-      if (createIsSuccess && !createIsLoading) {
+    //doesnt work correct 
+    useEffect(() => {
+      if (!selectedMovie?.id && createIsSuccess && !createIsUninitialized) {
+        console.log("create :> handleClose>");
+        // handleClose();
+        // setOpenSuccess(true);
+      }
+      if (selectedMovie?.id && editIsSuccess && !editIsUninitialized) {
+        console.log("edit :> handleClose>");
+
+        // handleClose();
+      }
+    }, [
+      createIsSuccess,
+      editIsSuccess,
+      createIsUninitialized,
+      editIsUninitialized,
+      handleClose,
+      selectedMovie,
+    ]);
+
+    const handleOnSaveMovie = async (movie) => {
+      if (selectedMovie.id) {
+        await editMovie(movie);
+        handleClose();
+      } else {
+        await createMovie(movie);
         handleClose();
         setOpenSuccess(true);
-      }
-    };
-
-    const onEditMovie = async (movie) => {
-      await editMovie(movie);
-      if (editIsSuccess && !editIsLoading) {
-        handleClose();
-      }
-    };
-
-    const handleOnSaveMovie = (movie) => {
-      if (selectedMovie.id) {
-        onEditMovie(movie);
-      } else {
-        onCreateMovie(movie);
       }
     };
 
@@ -128,17 +142,15 @@ const CreateEditMovieDialog = withEditableMovie(
           </IconButton>
           <DialogTitle className="title text-white uppercase">
             {selectedMovie?.id ? "Edit movie" : "Add movie"}
-            {createError}
-            {(editError || createError) && (
-              <div className="text-red-100 text-center text-sm">
-                {" "}
-                <ErrorIcon color="error" />{" "}
-                {`Error during ${
-                  selectedMovie?.id ? "edititing " : " creatind"
-                } movie !`}{" "}
-              </div>
-            )}
           </DialogTitle>
+          {(editError || createError) && (
+            <div className="text-red-100 text-center text-sm">
+              <ErrorIcon color="error" />
+              {`Error during ${
+                selectedMovie?.id ? "edititing " : " creatind"
+              } movie !`}
+            </div>
+          )}
           <form onSubmit={formik.handleSubmit}>
             <DialogContent>
               <div className="grid grid-cols-3 items-end gap-5">
@@ -167,7 +179,6 @@ const CreateEditMovieDialog = withEditableMovie(
                     id="title"
                     fullWidth
                     type="text"
-                    placeholder="Input title"
                     variant="standard"
                     value={title}
                     onChange={(e) => {
@@ -188,7 +199,6 @@ const CreateEditMovieDialog = withEditableMovie(
                     className="input-field mb-4"
                     id="poster_path"
                     type="text"
-                    placeholder="input Muvie URL"
                     fullWidth
                     variant="standard"
                     value={poster_path}
@@ -291,7 +301,6 @@ const CreateEditMovieDialog = withEditableMovie(
                     id="vote_average"
                     fullWidth
                     type="number"
-                    placeholder="Input ruting"
                     variant="standard"
                     value={vote_average}
                     onChange={(e) => {
@@ -318,7 +327,6 @@ const CreateEditMovieDialog = withEditableMovie(
                     id="runtime"
                     fullWidth
                     type="number"
-                    placeholder="Input runtime"
                     variant="standard"
                     value={runtime}
                     onChange={(e) => {
@@ -333,19 +341,18 @@ const CreateEditMovieDialog = withEditableMovie(
                 </div>
               </div>
               <FormControl className="w-full">
-              <InputLabel
-                    id="overview"
-                    className="text-red-100 uppercase text-xs font-light "
-                  >
-                    Overview
-                  </InputLabel>
+                <InputLabel
+                  id="overview"
+                  className="text-red-100 uppercase text-xs font-light "
+                >
+                  Overview
+                </InputLabel>
                 <TextareaAutosize
                   id="overview"
                   className=" bg-gray-300 text-white pl-2 mt-8"
                   aria-label="minimum height"
                   minRows={3}
                   maxRows={5}
-                  placeholder="Muvie overview"
                   style={{ width: "100%" }}
                   value={overview}
                   onChange={(e) => {

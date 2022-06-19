@@ -25,5 +25,5 @@ const movieSlise = createSlice({
 
 })
 
-export const  { addMovie, setSearch } = movieSlise.actions
+export const  { addMovie, setSearch, setMoviesList } = movieSlise.actions
 export default movieSlise.reducer

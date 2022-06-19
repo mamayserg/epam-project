@@ -43,9 +43,6 @@ export const apiSlice = createApi({
         url: `movies`,
         method: 'POST',
         body: data,
-        validateStatus: (resp) => {
-          return resp?.status === 204 ? false : true
-        },
       }),
       invalidatesTags: [{type: "movies"}]
     }), 
@@ -54,9 +51,6 @@ export const apiSlice = createApi({
         url: `movies`,
         method: 'PUT',
         body: data,
-        validateStatus: (resp) => {
-          return resp?.status === 204 ? false : true
-        },
       }),
       invalidatesTags: [{type: "movies"}]
     })
