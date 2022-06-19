@@ -21,7 +21,6 @@ const movieSlise = createSlice({
     state.moviesList = action.payload
   },
   
-  
 },
 
 })
