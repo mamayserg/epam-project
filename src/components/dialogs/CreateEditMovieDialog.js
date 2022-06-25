@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useFormik } from "formik";
 
 import Button from "@mui/material/Button";
@@ -50,6 +50,7 @@ const CreateEditMovieDialog = withEditableMovie(
     } = movie || {};
 
     const [openSuccess, setOpenSuccess] = useState(false);
+    const [onSaveTriggered, setOnSaveTriggered] = useState(false);
 
     const [
       createMovie,
@@ -74,35 +75,41 @@ const CreateEditMovieDialog = withEditableMovie(
       e.stopPropagation();
     };
 
-    //doesnt work correct 
-    useEffect(() => {
-      if (!selectedMovie?.id && createIsSuccess && !createIsUninitialized) {
-        console.log("create :> handleClose>");
-        // handleClose();
-        // setOpenSuccess(true);
-      }
-      if (selectedMovie?.id && editIsSuccess && !editIsUninitialized) {
-        console.log("edit :> handleClose>");
+    const closeModal = useCallback(() => {
+      handleClose();
+      setOnSaveTriggered(false);
+    }, [handleClose]);
 
-        // handleClose();
+    //doesnt work correct
+    useEffect(() => {
+      if (onSaveTriggered) {
+        if (!selectedMovie?.id && createIsSuccess && !createIsUninitialized) {
+          closeModal();
+          onResetMovie();
+          setOpenSuccess(true);
+        }
+        if (selectedMovie?.id && editIsSuccess && !editIsUninitialized) {
+          closeModal();
+        }
       }
     }, [
       createIsSuccess,
       editIsSuccess,
       createIsUninitialized,
       editIsUninitialized,
-      handleClose,
+      closeModal,
+      onResetMovie,
       selectedMovie,
+      onSaveTriggered,
     ]);
 
     const handleOnSaveMovie = async (movie) => {
+      setOnSaveTriggered(true);
+
       if (selectedMovie.id) {
         await editMovie(movie);
-        handleClose();
       } else {
         await createMovie(movie);
-        handleClose();
-        setOpenSuccess(true);
       }
     };
 
@@ -125,12 +132,12 @@ const CreateEditMovieDialog = withEditableMovie(
           maxWidth={"sm"}
           fullWidth
           open={open}
-          onClose={handleClose}
+          onClose={closeModal}
           onClick={handleChildClick}
         >
           <IconButton
             aria-label="close"
-            onClick={handleClose}
+            onClick={closeModal}
             sx={{
               position: "absolute",
               right: 8,
