@@ -4,6 +4,8 @@ import ErrorPage from "./pages/errorPage/ErrorPage";
 import SearchCard from "./components/searchCard/SearchCard";
 import SelectedMovieCard from "./components/selectedMovieCard/SelectedMovieCard";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { store } from './store/index';
+import { Provider } from "react-redux";
 
 const darkTheme = createTheme({
   palette: {
@@ -14,6 +16,7 @@ const darkTheme = createTheme({
 function App() {
   return (
     <>
+    <Provider store={store}>
       <ThemeProvider theme={darkTheme}>
         <Routes>
           <Route path="/" element={<Navigate to="/search" replace />} />
@@ -24,6 +27,7 @@ function App() {
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </ThemeProvider>
+      </Provider>
     </>
   );
 }

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useCallback } from "react";
 
-const MoviesList = ({movies}) => {
+const MoviesList = ({movies, isLoading}) => {
   const navigate = useNavigate();
   let { id } = useParams();
 
@@ -21,9 +21,9 @@ const MoviesList = ({movies}) => {
   },[movies]);
 
   return (
-    <div className="movies-list">
-      {movies.map((item) => (
-        <MovieItem movie={item} key={item.id} onClickComponent={openSelectedMovie} />
+     <div className="movies-list">
+      {(isLoading ? Array.from(new Array(3)) : movies).map((item, index) => (
+        <MovieItem isLoading={isLoading} movie={item} key={item?.id || index} onClickComponent={openSelectedMovie} />
       ))}
     </div>
   );

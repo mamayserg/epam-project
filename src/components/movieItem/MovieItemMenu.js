@@ -23,10 +23,12 @@ export default function MovieItemMenu({ movie }) {
 
   const handleDelete = (e) => {
     setOpenDelete(true);
+    handleClose(e)
     e.stopPropagation();
   };
   const handleEdit = (e) => {
     setOpenEdit(true);
+    handleClose(e)
     e.stopPropagation();
   };
 
