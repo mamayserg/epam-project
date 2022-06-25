@@ -33,7 +33,7 @@ export default function SortMoviesSelect() {
 
     const queryParams = {
       ...allQueryParams,
-      [queryParamsKeys.SORT_ORDER]: sortOrder.ASC,
+      [queryParamsKeys.SORT_ORDER]: sortOrder.DESC,
     };
     setSortByParam(event.target.value, queryParams )
   };

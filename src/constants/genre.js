@@ -11,11 +11,15 @@ export const genre = {
   THRILLER : "Thriller",
   SCIENCE: "Science",
   WESTERN: "Western",
+  DRAMA: "Drama",
+  SCIENCE_FICTION : "Science Fiction",
+  ANIMATION: "Animation",
+  FAMILY: "Family",
 };
 
 export const genreNames = {
   [genre.WESTERN]: "Western",
-  [genre.SCIENCE]: "Thriller",
+  [genre.SCIENCE]: "Science",
   [genre.THRILLER]: "Thriller",
   [genre.HORROR]: "Horror",
   [genre.ROMANCE]: "Romance",
@@ -27,6 +31,9 @@ export const genreNames = {
   [genre.DRAMA]: "Drama",
   [genre.CRIME]: "Crime",
   [genre.FICTION]: "Fiction",
+  [genre.SCIENCE_FICTION] : "Science Fiction",
+  [genre.ANIMATION]: "Animation",
+  [genre.FAMILY]: "Family",
 };
 
 export const movieGenre = () => {

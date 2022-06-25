@@ -21,10 +21,9 @@ const movieSlise = createSlice({
     state.moviesList = action.payload
   },
   
-  
 },
 
 })
 
-export const  { addMovie, setSearch } = movieSlise.actions
+export const  { addMovie, setSearch, setMoviesList } = movieSlise.actions
 export default movieSlise.reducer

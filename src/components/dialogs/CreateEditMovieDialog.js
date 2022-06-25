@@ -1,3 +1,6 @@
+import { useEffect, useState, useCallback } from "react";
+import { useFormik } from "formik";
+
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -12,10 +15,20 @@ import TextareaAutosize from "@mui/base/TextareaAutosize";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import Select from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
+import FormHelperText from "@mui/material/FormHelperText";
+import FormControl from "@mui/material/FormControl";
+
 import { withEditableMovie } from "../HOCs/withEditableMovie";
-import { useFormik } from "formik";
 import { validationSchema } from "./constants";
-import { useEffect } from "react";
+
+import {
+  useCreateMovieMutation,
+  useEditMovieMutation,
+} from "../../services/movies.service";
+import SuccessDialog from "../dialogs/SuccessDialog";
+import ErrorIcon from "@mui/icons-material/Error";
 
 const CreateEditMovieDialog = withEditableMovie(
   ({
@@ -25,18 +38,79 @@ const CreateEditMovieDialog = withEditableMovie(
     movie,
     onChangeMovie,
     onResetMovie,
-    onSaveMovie,
   }) => {
-    const { title, muvie_url, genre, release_date, ruting, runtime, overview } =
-      movie || {};
+    const {
+      title,
+      poster_path,
+      genres,
+      release_date,
+      vote_average,
+      runtime,
+      overview,
+    } = movie || {};
+
+    const [openSuccess, setOpenSuccess] = useState(false);
+    const [onSaveTriggered, setOnSaveTriggered] = useState(false);
+
+    const [
+      createMovie,
+      {
+        isLoading: createIsLoading,
+        isSuccess: createIsSuccess,
+        isError: createError,
+        isUninitialized: createIsUninitialized,
+      },
+    ] = useCreateMovieMutation();
+    const [
+      editMovie,
+      {
+        isLoading: editIsLoading,
+        isSuccess: editIsSuccess,
+        isError: editError,
+        isUninitialized: editIsUninitialized,
+      },
+    ] = useEditMovieMutation();
 
     const handleChildClick = (e) => {
       e.stopPropagation();
     };
 
-    const handleOnSaveMovie = (movie) => {
-      onSaveMovie(movie);
+    const closeModal = useCallback(() => {
       handleClose();
+      setOnSaveTriggered(false);
+    }, [handleClose]);
+
+    //doesnt work correct
+    useEffect(() => {
+      if (onSaveTriggered) {
+        if (!selectedMovie?.id && createIsSuccess && !createIsUninitialized) {
+          closeModal();
+          onResetMovie();
+          setOpenSuccess(true);
+        }
+        if (selectedMovie?.id && editIsSuccess && !editIsUninitialized) {
+          closeModal();
+        }
+      }
+    }, [
+      createIsSuccess,
+      editIsSuccess,
+      createIsUninitialized,
+      editIsUninitialized,
+      closeModal,
+      onResetMovie,
+      selectedMovie,
+      onSaveTriggered,
+    ]);
+
+    const handleOnSaveMovie = async (movie) => {
+      setOnSaveTriggered(true);
+
+      if (selectedMovie.id) {
+        await editMovie(movie);
+      } else {
+        await createMovie(movie);
+      }
     };
 
     const formik = useFormik({
@@ -53,203 +127,285 @@ const CreateEditMovieDialog = withEditableMovie(
     }, [formik, movie]);
 
     return (
-      <Dialog
-        maxWidth={"sm"}
-        fullWidth
-        open={open}
-        onClose={handleClose}
-        onClick={handleChildClick}
-      >
-        <IconButton
-          aria-label="close"
-          onClick={handleClose}
-          sx={{
-            position: "absolute",
-            right: 8,
-            top: 8,
-            color: "white",
-          }}
+      <>
+        <Dialog
+          maxWidth={"sm"}
+          fullWidth
+          open={open}
+          onClose={closeModal}
+          onClick={handleChildClick}
         >
-          <CloseIcon />
-        </IconButton>
-        <DialogTitle className="title text-white uppercase">
-          {selectedMovie?.id ? "Edit movie" : "Add movie"}
-        </DialogTitle>
-        <form onSubmit={formik.handleSubmit}>
-          <DialogContent>
-            <div className="grid grid-cols-3 items-end gap-5">
-              <div className="col-span-2">
-                {selectedMovie?.id && (
-                  <TextField
-                    className="input-field mt-4"
-                    id="movie_id"
-                    fullWidth
-                    label="Movie id"
-                    type="text"
-                    disabled
-                    variant="standard"
-                    value={selectedMovie?.id}
-                  />
-                )}
-
-                <TextField
-                  className="input-field mt-4"
-                  id="title"
-                  fullWidth
-                  label="Title"
-                  type="text"
-                  placeholder="Input title"
-                  variant="standard"
-                  value={title}
-                  onChange={(e) => {
-                    formik.handleChange(e);
-                    onChangeMovie({ title: e.target.value });
-                  }}
-                  error={formik.touched.title && Boolean(formik.errors.title)}
-                  helperText={formik.touched.title && formik.errors.title}
-                />
-                <TextField
-                  className="input-field mt-4"
-                  id="muvie_url"
-                  label="Muvie URL"
-                  type="text"
-                  placeholder="input Muvie URL"
-                  fullWidth
-                  variant="standard"
-                  value={muvie_url}
-                  onChange={(e) => {
-                    formik.handleChange(e);
-                    onChangeMovie({ muvie_url: e.target.value });
-                  }}
-                  error={
-                    formik.touched.muvie_url && Boolean(formik.errors.muvie_url)
-                  }
-                  helperText={
-                    formik.touched.muvie_url && formik.errors.muvie_url
-                  }
-                />
-                <TextField
-                  className="input-field mt-4"
-                  id="genre"
-                  select
-                  label="Genre"
-                  fullWidth
-                  placeholder="Select genre"
-                  variant="standard"
-                  value={genre}
-                  onChange={(e) => {
-                    formik.handleChange(e);
-                    onChangeMovie({ genre: e.target.value });
-                  }}
-                  error={formik.touched.genre && Boolean(formik.errors.genre)}
-                  helperText={formik.touched.genre && formik.errors.genre}
-                >
-                  {movieGenre().map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.name}
-                    </MenuItem>
-                  ))}
-                </TextField>
-              </div>
-
-              <div>
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <DatePicker
-                    id="release_date"
-                    label="Release date"
-                    value={release_date}
-                    onChange={(value) => {
-                      onChangeMovie({ release_date: value });
-                    }}
-                    renderInput={(params) => (
-                      <TextField
-                        className="input-field mt-4"
-                        fullWidth
-                        variant="standard"
-                        {...params}
-                        error={
-                          formik.touched.release_date &&
-                          Boolean(formik.errors.release_date)
-                        }
-                        helperText={
-                          formik.touched.release_date &&
-                          formik.errors.release_date
-                        }
-                      />
-                    )}
-                  />
-                </LocalizationProvider>
-                <TextField
-                  className="input-field mt-4"
-                  id="ruting"
-                  fullWidth
-                  label="Ruting"
-                  type="number"
-                  placeholder="Input ruting"
-                  variant="standard"
-                  value={ruting}
-                  onChange={(e) => {
-                    formik.handleChange(e);
-                    onChangeMovie({ ruting: e.target.value });
-                  }}
-                  error={formik.touched.ruting && Boolean(formik.errors.ruting)}
-                  helperText={formik.touched.ruting && formik.errors.ruting}
-                />
-                <TextField
-                  className="input-field mt-4"
-                  id="runtime"
-                  fullWidth
-                  label="Runtime"
-                  type="text"
-                  placeholder="Input runtime"
-                  variant="standard"
-                  value={runtime}
-                  onChange={(e) => {
-                    formik.handleChange(e);
-                    onChangeMovie({ runtime: e.target.value });
-                  }}
-                  error={
-                    formik.touched.runtime && Boolean(formik.errors.runtime)
-                  }
-                  helperText={formik.touched.runtime && formik.errors.runtime}
-                />
-              </div>
+          <IconButton
+            aria-label="close"
+            onClick={closeModal}
+            sx={{
+              position: "absolute",
+              right: 8,
+              top: 8,
+              color: "white",
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+          <DialogTitle className="title text-white uppercase">
+            {selectedMovie?.id ? "Edit movie" : "Add movie"}
+          </DialogTitle>
+          {(editError || createError) && (
+            <div className="text-red-100 text-center text-sm">
+              <ErrorIcon color="error" />
+              {`Error during ${
+                selectedMovie?.id ? "edititing " : " creatind"
+              } movie !`}
             </div>
-            <TextareaAutosize
-              label="overview"
-              id="overview"
-              className=" bg-gray-300 text-white pl-2 mt-8"
-              aria-label="minimum height"
-              minRows={3}
-              placeholder="Muvie overview"
-              style={{ width: "100%" }}
-              value={overview}
-              onChange={(e) => {
-                onChangeMovie({ overview: e.target.value });
-              }}
-            />
-          </DialogContent>
+          )}
+          <form onSubmit={formik.handleSubmit}>
+            <DialogContent>
+              <div className="grid grid-cols-3 items-end gap-5">
+                <div className="col-span-2">
+                  {selectedMovie?.id && (
+                    <TextField
+                      className="input-field mt-4"
+                      id="movie_id"
+                      fullWidth
+                      label="Movie id"
+                      type="text"
+                      disabled
+                      variant="standard"
+                      value={selectedMovie?.id}
+                    />
+                  )}
 
-          <DialogActions>
-            <Button
-              className=" uppercase  text-red-100 font-light w-36"
-              color="error"
-              variant="outlined"
-              onClick={onResetMovie}
-            >
-              Reset
-            </Button>
-            <Button
-              className=" uppercase  text-white bg-red-100 font-light w-36"
-              variant="contained"
-              type="submit"
-              // onClick={handleOnSaveMovie}
-            >
-              Submit
-            </Button>
-          </DialogActions>
-        </form>
-      </Dialog>
+                  <InputLabel
+                    id="title"
+                    className="text-red-100 uppercase text-xs font-light mt-4"
+                  >
+                    Title
+                  </InputLabel>
+                  <TextField
+                    className="input-field"
+                    id="title"
+                    fullWidth
+                    type="text"
+                    variant="standard"
+                    value={title}
+                    onChange={(e) => {
+                      formik.handleChange(e);
+                      onChangeMovie({ title: e.target.value });
+                    }}
+                    error={formik.touched.title && Boolean(formik.errors.title)}
+                    helperText={formik.touched.title && formik.errors.title}
+                  />
+
+                  <InputLabel
+                    id="poster_path"
+                    className="text-red-100 uppercase text-xs font-light mt-4"
+                  >
+                    Muvie URL
+                  </InputLabel>
+                  <TextField
+                    className="input-field mb-4"
+                    id="poster_path"
+                    type="text"
+                    fullWidth
+                    variant="standard"
+                    value={poster_path}
+                    onChange={(e) => {
+                      formik.handleChange(e);
+                      onChangeMovie({ poster_path: e.target.value });
+                    }}
+                    error={
+                      formik.touched.poster_path &&
+                      Boolean(formik.errors.poster_path)
+                    }
+                    helperText={
+                      formik.touched.poster_path && formik.errors.poster_path
+                    }
+                  />
+                  <InputLabel
+                    id="genres"
+                    className="text-red-100 uppercase text-xs font-light"
+                  >
+                    Genre
+                  </InputLabel>
+                  <FormControl className="w-full" id="genres">
+                    <Select
+                      label="Genre"
+                      className="input-field  w-full"
+                      id="genres"
+                      multiple
+                      variant="standard"
+                      value={genres}
+                      onChange={(e) => {
+                        formik.handleChange(e);
+                        onChangeMovie({
+                          genres:
+                            typeof e.target.value === "string"
+                              ? e.target.value.split(",")
+                              : e.target.value,
+                        });
+                      }}
+                      error={
+                        formik.touched.genres && Boolean(formik.errors.genres)
+                      }
+                    >
+                      {movieGenre().map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    {formik.touched.genres && formik.errors.genres && (
+                      <FormHelperText className="text-red-100">
+                        {formik.errors.genres}
+                      </FormHelperText>
+                    )}
+                  </FormControl>
+                </div>
+
+                <div>
+                  <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <InputLabel
+                      id="release_date"
+                      className="text-red-100 uppercase text-xs font-light mt-4"
+                    >
+                      Release date
+                    </InputLabel>
+                    <DatePicker
+                      id="release_date"
+                      value={release_date}
+                      onChange={(value) => {
+                        onChangeMovie({ release_date: value });
+                      }}
+                      renderInput={(params) => (
+                        <>
+                          <TextField
+                            className="input-field "
+                            fullWidth
+                            variant="standard"
+                            {...params}
+                            error={
+                              formik.touched.release_date &&
+                              Boolean(formik.errors.release_date)
+                            }
+                            helperText={
+                              formik.touched.release_date &&
+                              formik.errors.release_date
+                            }
+                          />
+                        </>
+                      )}
+                    />
+                  </LocalizationProvider>
+
+                  <InputLabel
+                    id="vote_average"
+                    className="text-red-100 uppercase text-xs font-light mt-4"
+                  >
+                    Ruting
+                  </InputLabel>
+                  <TextField
+                    className="input-field"
+                    id="vote_average"
+                    fullWidth
+                    type="number"
+                    variant="standard"
+                    value={vote_average}
+                    onChange={(e) => {
+                      formik.handleChange(e);
+                      onChangeMovie({ vote_average: Number(e.target.value) });
+                    }}
+                    error={
+                      formik.touched.vote_average &&
+                      Boolean(formik.errors.vote_average)
+                    }
+                    helperText={
+                      formik.touched.vote_average && formik.errors.vote_average
+                    }
+                  />
+
+                  <InputLabel
+                    id="runtime"
+                    className="text-red-100 uppercase text-xs font-light mt-4"
+                  >
+                    Runtime
+                  </InputLabel>
+                  <TextField
+                    className="input-field"
+                    id="runtime"
+                    fullWidth
+                    type="number"
+                    variant="standard"
+                    value={runtime}
+                    onChange={(e) => {
+                      formik.handleChange(e);
+                      onChangeMovie({ runtime: Number(e.target.value) });
+                    }}
+                    error={
+                      formik.touched.runtime && Boolean(formik.errors.runtime)
+                    }
+                    helperText={formik.touched.runtime && formik.errors.runtime}
+                  />
+                </div>
+              </div>
+              <FormControl className="w-full">
+                <InputLabel
+                  id="overview"
+                  className="text-red-100 uppercase text-xs font-light "
+                >
+                  Overview
+                </InputLabel>
+                <TextareaAutosize
+                  id="overview"
+                  className=" bg-gray-300 text-white pl-2 mt-8"
+                  aria-label="minimum height"
+                  minRows={3}
+                  maxRows={5}
+                  style={{ width: "100%" }}
+                  value={overview}
+                  onChange={(e) => {
+                    onChangeMovie({ overview: e.target.value });
+                  }}
+                />
+                {formik.touched.overview && formik.errors.overview && (
+                  <FormHelperText className="text-red-100">
+                    {formik.errors.overview}
+                  </FormHelperText>
+                )}
+              </FormControl>
+            </DialogContent>
+
+            <DialogActions>
+              <Button
+                className=" uppercase  text-red-100 font-light w-36"
+                color="error"
+                variant="outlined"
+                onClick={onResetMovie}
+              >
+                Reset
+              </Button>
+              <Button
+                className=" uppercase  text-white bg-red-100 font-light w-36"
+                variant="contained"
+                type="submit"
+                loading={
+                  selectedMovie?.id
+                    ? createIsLoading.toString()
+                    : editIsLoading.toString()
+                }
+              >
+                Submit
+              </Button>
+            </DialogActions>
+          </form>
+        </Dialog>
+
+        <SuccessDialog
+          handleClose={() => {
+            setOpenSuccess(false);
+          }}
+          open={openSuccess}
+        />
+      </>
     );
   }
 );

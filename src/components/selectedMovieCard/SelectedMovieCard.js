@@ -19,8 +19,7 @@ const SelectedMovieCard = () => {
     if (error) {
       navigate(`/search`);
     }
-    // eslint-disable-next-line
-  }, error);
+  }, [error, navigate]);
 
   return (
     <div className="bg-gray-500">
