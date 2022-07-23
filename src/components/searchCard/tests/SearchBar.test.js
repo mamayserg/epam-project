@@ -6,6 +6,7 @@ const routeName = '/search?searchBy=title&search=test+route+name'
 
 const setup = () => {
   const utils = render(<MemoryRouter initialEntries={[routeName]}><SearchBar /></MemoryRouter>)
+  // eslint-disable-next-line testing-library/prefer-screen-queries
   const input = utils.getByLabelText('search-input')
   return {
     input,

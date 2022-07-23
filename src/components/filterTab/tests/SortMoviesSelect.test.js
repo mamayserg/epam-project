@@ -7,6 +7,7 @@ const emptyRoute = '/search'
 
 const setup = (routeName ) => {
   const utils = render(<MemoryRouter initialEntries={[routeName]}><SortMoviesSelect /></MemoryRouter>)
+  // eslint-disable-next-line testing-library/prefer-screen-queries
   const input = utils.getByLabelText('sort-movie')
   return {
     input,

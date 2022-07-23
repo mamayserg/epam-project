@@ -50,7 +50,6 @@ const CreateEditMovieDialog = withEditableMovie(
     } = movie || {};
 
     const [openSuccess, setOpenSuccess] = useState(false);
-    const [onSaveTriggered, setOnSaveTriggered] = useState(false);
 
     const [
       createMovie,
@@ -59,6 +58,7 @@ const CreateEditMovieDialog = withEditableMovie(
         isSuccess: createIsSuccess,
         isError: createError,
         isUninitialized: createIsUninitialized,
+        reset: resetCreateMovieMutation 
       },
     ] = useCreateMovieMutation();
     const [
@@ -68,6 +68,7 @@ const CreateEditMovieDialog = withEditableMovie(
         isSuccess: editIsSuccess,
         isError: editError,
         isUninitialized: editIsUninitialized,
+        reset: resetEditMovieMutation 
       },
     ] = useEditMovieMutation();
 
@@ -77,12 +78,11 @@ const CreateEditMovieDialog = withEditableMovie(
 
     const closeModal = useCallback(() => {
       handleClose();
-      setOnSaveTriggered(false);
-    }, [handleClose]);
+      resetEditMovieMutation()
+      resetCreateMovieMutation();
+    }, [handleClose, resetCreateMovieMutation, resetEditMovieMutation]);
 
-    //doesnt work correct
     useEffect(() => {
-      if (onSaveTriggered) {
         if (!selectedMovie?.id && createIsSuccess && !createIsUninitialized) {
           closeModal();
           onResetMovie();
@@ -91,7 +91,6 @@ const CreateEditMovieDialog = withEditableMovie(
         if (selectedMovie?.id && editIsSuccess && !editIsUninitialized) {
           closeModal();
         }
-      }
     }, [
       createIsSuccess,
       editIsSuccess,
@@ -100,11 +99,9 @@ const CreateEditMovieDialog = withEditableMovie(
       closeModal,
       onResetMovie,
       selectedMovie,
-      onSaveTriggered,
     ]);
 
     const handleOnSaveMovie = async (movie) => {
-      setOnSaveTriggered(true);
 
       if (selectedMovie.id) {
         await editMovie(movie);
