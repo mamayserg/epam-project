@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import MovieGenre from '../MovieGenre';
+import React from 'react';
 
 test('renders MovieGenre with two genres', () => {
   render(<MovieGenre genre={['Action', 'Comedy']} />);

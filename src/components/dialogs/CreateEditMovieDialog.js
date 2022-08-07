@@ -29,6 +29,7 @@ import {
 } from "../../services/movies.service";
 import SuccessDialog from "../dialogs/SuccessDialog";
 import ErrorIcon from "@mui/icons-material/Error";
+import React from 'react';
 
 const CreateEditMovieDialog = withEditableMovie(
   ({
