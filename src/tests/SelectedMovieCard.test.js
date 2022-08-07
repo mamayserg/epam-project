@@ -1,7 +1,7 @@
-import { useGetMovieQuery } from "../../../services/movies.service";
+import { useGetMovieQuery } from "../services/movies.service";
 import { renderHook } from "@testing-library/react-hooks";
 import fetchMock, { enableFetchMocks } from "jest-fetch-mock";
-import { store } from '../../../store'
+import { store } from '../store'
 import { Provider } from "react-redux";
 import React from 'react';
 

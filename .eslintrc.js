@@ -22,7 +22,8 @@ module.exports = {
           "version": "detect"
         }
       },
-    "ignorePatterns": ["**/*.css"],
+    "ignorePatterns": ["**/*.css",  "**/*.test.ts",
+    "**/*.config.js"],
     "rules": {
         "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error",

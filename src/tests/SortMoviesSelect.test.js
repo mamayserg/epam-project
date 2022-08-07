@@ -1,4 +1,4 @@
-import SortMoviesSelect from "../SortMoviesSelect";
+import SortMoviesSelect from "../components/filterTab/SortMoviesSelect";
 import {render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom';
 

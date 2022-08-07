@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import React from "react";
-import SuccessDialog from '../SuccessDialog'
+import SuccessDialog from '../components/dialogs/SuccessDialog'
 import React from 'react';
 
 describe('searchCard', ()=>{

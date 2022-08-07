@@ -1,5 +1,5 @@
 import { renderHook, act } from "@testing-library/react-hooks";
-import { useInput } from "../use-input";
+import { useInput } from "../hooks/use-input";
 
 describe("useInputHook", () => {
   it("renders empty useInputHook", () => {

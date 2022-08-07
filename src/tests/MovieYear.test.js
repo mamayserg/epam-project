@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import MovieYear from '../MovieYear';
+import MovieYear from '../components/movieItem/MovieYear';
 import React from 'react';
 
 test('renders Movie Year', () => {

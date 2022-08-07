@@ -1,4 +1,4 @@
-import SearchBar from '../SearchBar'
+import SearchBar from '../components/searchCard/SearchBar'
 import {render, fireEvent} from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom';
 const routeName = '/search?searchBy=title&search=test+route+name'

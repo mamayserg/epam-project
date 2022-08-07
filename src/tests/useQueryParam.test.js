@@ -1,10 +1,10 @@
 import { renderHook, act } from "@testing-library/react-hooks";
-import { useQueryParam } from "../use-query-param";
+import { useQueryParam } from "../hooks/use-query-param";
 import { BrowserRouter as Router, useLocation } from "react-router-dom";
 import {
   queryParamsKeys,
   queryParamsValues,
-} from "../../constants/searchParams";
+} from "../constants/searchParams";
 
 const queryParams = {
   [queryParamsKeys.SEARCH_BY]: queryParamsValues.TITLE,

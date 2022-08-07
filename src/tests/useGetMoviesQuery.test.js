@@ -2,8 +2,8 @@ import React from "react";
 import fetchMock, { enableFetchMocks } from "jest-fetch-mock";
 import { renderHook } from "@testing-library/react-hooks";
 import { Provider } from "react-redux";
-import { store } from '../../store'
-import { useGetMoviesQuery } from '../movies.service.js';
+import { store } from '../store'
+import { useGetMoviesQuery } from '../services/movies.service.js';
 
 enableFetchMocks()
 

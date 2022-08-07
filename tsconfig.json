@@ -1,5 +1,5 @@
 {
-  "include": ["**/*.ts", "**/*.tsx", "src/components/HOCs/withEditableMovie.js"],
+  "include": ["**/*.ts", "**/*.tsx"],
   "compilerOptions": {
     "outDir": "build/dist",
     "module": "commonjs",
@@ -24,7 +24,10 @@
     "acceptance-tests",
     "webpack",
     "jest",
-    "src/setupTests.ts"
+    "src/setupTests.ts",
+    "./src/**/*.test.js",
+    "**/*.config.js",
+    "./tests"
   ],
   "types": [
     "typePatches"
