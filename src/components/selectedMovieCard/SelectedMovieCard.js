@@ -1,5 +1,5 @@
 import Header from "../layout/Header";
-import "./selectedMovieCard.css";
+// import "./selectedMovieCard.css";
 import MovieGenre from "../movieItem/MovieGenre";
 
 const SelectedMovieCard = () => (

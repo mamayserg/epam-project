@@ -1,6 +1,6 @@
 import { Route, Routes, Navigate } from "react-router-dom";
-import SearchPage from "./pages/SearchPage";
-import ErrorPage from "./pages/errorPage/ErrorPage";
+import SearchPage from "./components/pages/SearchPage";
+import ErrorPage from "./components/pages/errorPage/ErrorPage";
 import SearchCard from "./components/searchCard/SearchCard";
 import SelectedMovieCard from "./components/selectedMovieCard/SelectedMovieCard";
 import { ThemeProvider, createTheme } from "@mui/material/styles";

@@ -2,16 +2,19 @@ import MovieGenre from "./MovieGenre";
 import MovieName from "./MovieName";
 import MovieYear from "./MovieYear";
 import MovieItemMenu from "./MovieItemMenu";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 const MovieItem = ({ movie }) => {
-  const navigate = useNavigate();
+  const router = useRouter()
+  // const navigate = useNavigate();
   let { id } = useParams();
 
   const openSelectedMovie = () => {
     if (String(id) !== String(movie.id)) {
-      navigate(`/search/${movie.id}`);
+      router.push(`/search/${movie.id}`);
       window.scrollTo({
         top: 0,
         left: 0,
@@ -26,7 +29,7 @@ const MovieItem = ({ movie }) => {
       onClick={openSelectedMovie}
     >
       <MovieItemMenu movie={movie} />
-      <img src={require(`../../images/film.jpg`)} alt="film" />
+      <Image src={require(`../../images/film.jpg`)} alt="film" />
       <div className="flex flex-row align-top justify-between mt-3">
         <div className="flex flex-col">
           <MovieName name={movie.title} />

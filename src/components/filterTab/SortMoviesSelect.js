@@ -3,7 +3,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { sortMovieBy } from './constants'
-import './sortMovieSelect.css'
+// import './sortMovieSelect.css'
 // import { useLocation } from "react-router-dom";
 
 export default function SortMoviesSelect() {

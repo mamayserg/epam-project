@@ -1,10 +1,12 @@
 import TabItem from "./TabItem";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 import { tabs } from "./constants";
 import SortMoviesSelect from "./SortMoviesSelect";
+import { useRouter } from "next/router";
 
 const FilterTab = () => {
-  let location = useLocation();
+  // let location = useLocation();
+  const router = useRouter();
 
   return (
     <div className="text-center text-xs	text-white font-light border-b border-gray-200  flex justify-between ">
@@ -14,7 +16,7 @@ const FilterTab = () => {
             <TabItem
               key={item.name}
               path={item.path}
-              active={location.hash === item.path.hash}
+              active={router.query === item.path.hash}
               name={item.name}
             />
           ))}

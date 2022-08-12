@@ -1,6 +1,6 @@
 import {useState} from "react";
 import NetflixLogo from "./NetflixLogo";
-import { Link } from "react-router-dom";
+import Link from 'next/link'
 import { VscSearch } from "react-icons/vsc";
 import CreateEditMovieDialog from "../dialogs/CreateEditMovieDialog";
 import { defaultMovie } from "../dialogs/constants";
@@ -20,8 +20,10 @@ const Header = ({ isMovieCard }) => {
       <div className="text-left flex flex-row justify-between align-top">
         <NetflixLogo opacity={isMovieCard ? 0.7 : 1} />
         {isMovieCard ? (
-          <Link to="/search">
+          <Link href="/search">
+             <a>
             <VscSearch className="text-red-100 mt-2 text-lg" />
+            </a>
           </Link>
         ) : (
           <button

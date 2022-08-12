@@ -1,6 +1,6 @@
 import MovieItem from "../movieItem/MovieItem";
 import { movies } from "./constants";
-import "./moviesList.css";
+// import "./moviesList.css";
 
 const MoviesList = () => {
   return (

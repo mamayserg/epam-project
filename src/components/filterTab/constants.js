@@ -1,38 +1,23 @@
 export const tabs = [
   {
     name: "ALL",
-    path: {
-      pathname: "/search",
-      hash: "",
-    },
+    path:  "/search",
   },
   {
     name: "DOCUMENTARY",
-    path: {
-      pathname: "/search",
-      hash: "#documentary",
-    },
+    path: "/search#documentary",
   },
   {
     name: "COMEDY",
-    path: {
-      pathname: "/search",
-      hash: "#comedy",
-    },
+    path: "/search#comedy",
   },
   {
     name: "HORROR",
-    path: {
-      pathname: "/search",
-      hash: "#horrot",
-    },
+    path: "/search#horrot",
   },
   {
     name: "CRIME",
-    path: {
-      pathname: "/search",
-      hash: "#crime",
-    },
+    path: "/search#crime",
   },
 ];
 

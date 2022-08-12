@@ -1,6 +1,6 @@
 import Header from "../layout/Header";
 import SearchBar from "./SearchBar";
-import "./searchCard.css";
+// import "./searchCard.css";
 import ErrorBoundary from "../common/ErrorBoundary";
 
 const SearchCard = () => (
