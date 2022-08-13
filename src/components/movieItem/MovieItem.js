@@ -2,44 +2,50 @@ import MovieGenre from "./MovieGenre";
 import MovieName from "./MovieName";
 import MovieYear from "./MovieYear";
 import MovieItemMenu from "./MovieItemMenu";
-// import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
 import Image from 'next/image'
-import { useRouter } from 'next/router'
+import Skeleton from "@mui/material/Skeleton";
 
-const MovieItem = ({ movie }) => {
-  const router = useRouter()
-  // const navigate = useNavigate();
-  let { id } = useParams();
-
-  const openSelectedMovie = () => {
-    if (String(id) !== String(movie.id)) {
-      router.push(`/search/${movie.id}`);
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "smooth",
-      });
-    }
-  };
+const MovieItem = ({ movie, onClickComponent, isLoading }) => {
+  const onClick = () => onClickComponent(movie);
 
   return (
-    <div
-      className="movie-item relative cursor-pointer"
-      onClick={openSelectedMovie}
-    >
-      <MovieItemMenu movie={movie} />
-      <Image src={require(`../../images/film.jpg`)} alt="film" />
-      <div className="flex flex-row align-top justify-between mt-3">
-        <div className="flex flex-col">
-          <MovieName name={movie.title} />
-          <MovieGenre genre={movie.genre} />
+    <>
+      {isLoading && (
+        <div className="mb-10">
+          <Skeleton variant="rectangular" height={310} />
+          <Skeleton
+            animation="wave"
+            height={10}
+            style={{ marginBottom: 15, marginTop: 15 }}
+          />
+          <Skeleton animation="wave" height={10} width="80%" />
         </div>
-        <div>
-          <MovieYear year={movie.year} />
+      )}
+      {!isLoading && (
+        <div
+          className="movie-item flex justify-between flex-col relative cursor-pointer"
+          onClick={onClick}
+        >
+          <MovieItemMenu movie={movie} />
+          <Image
+            width="200"
+            height="480"
+            className="movie-item-img"
+            src={`${movie.poster_path}`}
+            alt="film"
+          />
+          <div className="flex flex-row align-top justify-between mt-3">
+            <div className="flex flex-col">
+              <MovieName name={movie.title} />
+              <MovieGenre genre={movie.genres} />
+            </div>
+            <div>
+              <MovieYear date={movie.release_date} />
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+.css-u07r4q-MuiInputBase-root-MuiInput-root-MuiSelect-root:before{
+  border-color: #232323 !important;
+}
+
+.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper, .css-tlc64q-MuiPaper-root-MuiDialog-paper{
+  background-color: #232323 !important;
+  color: white !important;
+  border-color: #555555 !important;
+}
+
 body {
   height: 100%;
   margin: 0;
@@ -28,7 +38,13 @@ code {
 }
 
 .selected-movie-card {
-  height: 270px;
+  height: 460px;
+}
+
+.selected-card--img {
+  height: 440px;
+  width: 30%;
+  min-width: 300px;
 }
 
 .input-field input, .input-field .MuiSelect-select {
@@ -50,4 +66,107 @@ code {
 .input-field .MuiInputBase-root.MuiInput-root{
 padding-right: 10px;
 background: #424242 !important;
+}
+
+.selected-card--img {
+  height: 400px;
+  width: 30%;
+}
+/* search-card */
+.search-card--wrap:before {
+  background-image: url("./images/movies.jpg");
+  background-color: black;
+  background-size: cover;
+  content: " ";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.2;
+}
+.search-card--wrap {
+  position: relative;
+}
+.search-card {
+  position: relative;
+}
+.demo-content {
+  position: relative;
+}
+.search-card--bar {
+  height: 170px;
+}
+
+.movies-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 40px;
+}
+.movie-item-img {
+  height: 480px;
+}
+
+
+@media only screen and (max-width: 1600px) {
+  .movies-list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .movies-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .movies-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* .movie-item {
+  height: 580px;
+} */
+
+
+/*======================
+    404 page
+=======================*/
+
+.page_404 {
+  padding: 80px 0;
+  background: #fff;
+  font-family: "Arvo", serif;
+}
+
+.page_404 img {
+  width: 100%;
+}
+
+.four_zero_four_bg {
+  background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
+  height: 400px;
+  background-position: center;
+}
+
+.four_zero_four_bg h1 {
+  font-size: 80px;
+}
+
+.four_zero_four_bg h3 {
+  font-size: 80px;
+}
+
+.link_404 {
+  color: #fff !important;
+  padding: 10px 20px;
+  background: #39ac31;
+  margin: 20px 0;
+  display: inline-block;
+}
+.contant_box_404 {
+  margin-top: -50px;
 }

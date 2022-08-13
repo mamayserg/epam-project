@@ -1,10 +1,9 @@
 import Header from "../layout/Header";
 import SearchBar from "./SearchBar";
-// import "./searchCard.css";
 import ErrorBoundary from "../common/ErrorBoundary";
 
 const SearchCard = () => (
-  <div className="bg-gray-600 search-card--wrap">
+  <div className="search-card--wrap bg-gray-600">
     <div className="search-card">
       <Header />
       <div className="flex justify-center w-full mt-6 mb-24 search-card--bar">

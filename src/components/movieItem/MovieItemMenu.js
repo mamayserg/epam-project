@@ -23,10 +23,12 @@ export default function MovieItemMenu({ movie }) {
 
   const handleDelete = (e) => {
     setOpenDelete(true);
+    handleClose(e)
     e.stopPropagation();
   };
   const handleEdit = (e) => {
     setOpenEdit(true);
+    handleClose(e)
     e.stopPropagation();
   };
 
@@ -46,7 +48,7 @@ export default function MovieItemMenu({ movie }) {
   return (
     <>
       <IconButton
-      className=" absolute top-0 right-0"
+        className=" absolute top-0 right-0 z-10"
         aria-label="more"
         id="long-button"
         aria-controls={open ? "long-menu" : undefined}

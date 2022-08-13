@@ -1,5 +1,4 @@
 import Link from 'next/link'
-// import "./errorPage.css";
 
 const ErrorPage = () => (
   <section className="page_404 h-full">
