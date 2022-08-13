@@ -39,6 +39,7 @@ const SearchBar = () => {
     <div className="flex flex-row w-full">
       <input
         className="w-full  bg-gray-500 text-white"
+        aria-label="search-input"
         value={value}
         onChange={handleChange}
       />

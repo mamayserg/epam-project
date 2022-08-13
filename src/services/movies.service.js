@@ -1,9 +1,11 @@
 import { fetchBaseQuery, createApi } from "@reduxjs/toolkit/query/react";
 
+export const serviceURL =  "http://localhost:4000/";
+
 export const apiSlice = createApi({
-  reducerPath: 'api',
+  reducerPath: 'apiSlice',
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:4000/",
+    baseUrl: serviceURL,
   }),
   tagTypes: "movies",
   endpoints: (build) => ({

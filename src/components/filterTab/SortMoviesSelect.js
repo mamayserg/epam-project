@@ -41,8 +41,7 @@ export default function SortMoviesSelect() {
     <div className="pt-1">
       <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }} size="small">
         <Select
-          labelId="demo-simple-select-standard-label"
-          id="demo-simple-select-standard"
+          aria-label="sort-movie"
           value={value}
           onChange={handleChange}
         >
