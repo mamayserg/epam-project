@@ -14,7 +14,6 @@ export const withEditableMovie = (Component) => {
     };
 
     const onSaveMovie = (validatedMovie) => {
-      console.log("Saved movieId", validatedMovie);
     };
     const onResetMovie = () => {
       setMovie(originalMovie);
