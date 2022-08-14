@@ -1,0 +1,48 @@
+{
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "compilerOptions": {
+    "outDir": "build/dist",
+    "module": "commonjs",
+    "target": "es5",
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    "sourceMap": true,
+    "allowJs": true,
+    "jsx": "preserve",
+    "moduleResolution": "node",
+    "rootDir": "src",
+    "noImplicitReturns": false,
+    "noImplicitThis": false,
+    "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "downlevelIteration": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "incremental": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true
+  },
+  "exclude": [
+    "node_modules",
+    "build",
+    "scripts",
+    "acceptance-tests",
+    "webpack",
+    "jest",
+    "src/setupTests.ts",
+    "./src/**/*.test.js",
+    "**/*.config.js",
+    "./tests"
+  ],
+  "types": [
+    "typePatches"
+  ]
+}
