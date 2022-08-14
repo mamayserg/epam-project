@@ -1,7 +1,7 @@
-import { useSearchParams } from "react-router-dom";
+import { useRouter } from "next/router";
 import { useCallback, useMemo } from "react";
 
-type queryParam = {
+export type queryParam = {
   [key: string]: string;
 }
 
@@ -12,18 +12,20 @@ type queryParamsType = [
 ]
 
 export const useQueryParam = (key: string): queryParamsType => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const paramValue = searchParams.get(key);
+  const router = useRouter();
+
+  const paramValue: string = (router.query[key] || '') as string 
   const value = useMemo(() => paramValue, [paramValue]);
 
   const setValue = useCallback(
-    (newValue:string , queryParams:queryParam = {}) => {
-      setSearchParams({ ...queryParams, [key]: newValue });
+    (newValue:string, queryParams:queryParam = {}) => {
+      router.replace({
+        query: { ...queryParams, [key]: newValue },
+     });
     },
-    [key, setSearchParams]
+    [key, router]
   );
-  
-  const allQueryParams = Object.fromEntries([...searchParams]) || {};
 
+  const allQueryParams: queryParam = router.query as queryParam
   return [value, setValue, allQueryParams];
 };

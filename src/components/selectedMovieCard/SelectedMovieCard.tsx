@@ -1,26 +1,23 @@
 import Header from "../layout/Header";
-import "./selectedMovieCard.css";
 import MovieGenre from "../movieItem/MovieGenre";
 import { useGetMovieQuery } from "../../services/movies.service";
-import { useParams } from "react-router-dom";
 import Skeleton from "@mui/material/Skeleton";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useRouter } from "next/router";
+import Image from "next/image";
+import React, { useEffect } from "react";
 import { getYearFromDate } from "../../helpers/getYear.helper";
-import { minutesConvert }  from "../../helpers/convertMinutes.helper";
-import React from 'react';
+import { minutesConvert } from "../../helpers/convertMinutes.helper";
 
 const SelectedMovieCard = () => {
-  const navigate = useNavigate();
-  const { id } = useParams();
+  const router = useRouter();
 
-  const { data, isLoading, error } = useGetMovieQuery(id);
+  const { data, isLoading, error } = useGetMovieQuery(router.query.id);
 
   useEffect(() => {
     if (error) {
-      navigate(`/search`);
+      router.push(`/search`);
     }
-  }, [error, navigate]);
+  }, [error, router]);
 
   return (
     <div className="bg-gray-500">
@@ -34,7 +31,9 @@ const SelectedMovieCard = () => {
             height={400}
           />
         ) : (
-          <img
+          <Image
+            width="500"
+            height="440"
             className="selected-card--img mr-10 z-10"
             src={`${data.poster_path}`}
             alt="film"

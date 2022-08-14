@@ -4,6 +4,7 @@ import MovieGenre from "./MovieGenre";
 import MovieName from "./MovieName";
 import MovieYear from "./MovieYear";
 import MovieItemMenu from "./MovieItemMenu";
+import Image from 'next/image'
 import Skeleton from "@mui/material/Skeleton";
 import { Movie } from "../../interfaces/movie.interface"
 
@@ -35,7 +36,9 @@ const MovieItem = ({ movie, onClickComponent, isLoading }: MovieItemProps) => {
           onClick={onClick}
         >
           <MovieItemMenu movie={movie} />
-          <img
+          <Image
+            width="200"
+            height="480"
             className="movie-item-img"
             src={`${movie.poster_path}`}
             alt="film"

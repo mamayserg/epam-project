@@ -2,21 +2,20 @@ import TabItem from "./TabItem";
 import { allTab } from "./constants";
 import SortMoviesSelect from "./SortMoviesSelect";
 import { movieGenre } from "../../constants/genre";
-import { useSearchParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import React, { useState, useEffect } from "react";
 import {
   queryParamsValues,
   queryParamsKeys,
 } from "../../constants/searchParams";
-import React from "react";
 
 const FilterTab = () => {
-  const [searchParams] = useSearchParams();
+  const { query } = useRouter();
   const [currentParams, setCurrentParams] = useState<string | null>(null);
 
   useEffect(() => {
-    setCurrentParams(searchParams.get(queryParamsKeys.SEARCH));
-  }, [searchParams]);
+    setCurrentParams(query[queryParamsKeys.SEARCH] as string);
+  }, [query]);
   const tabs = [...allTab, ...movieGenre().slice(0, 5)];
 
   return (

@@ -1,25 +1,21 @@
 import MovieItem from "../movieItem/MovieItem";
-import "./moviesList.css";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
-import { useCallback } from "react";
-import React from "react";
+import { useRouter } from 'next/router'
+import React, { useCallback } from "react";
 import {Movie} from "../../interfaces/movie.interface"
 
 const MoviesList = ({movies, isLoading}: {movies: Movie[], isLoading: boolean}) => {
-  const navigate = useNavigate();
-  const { id } = useParams();
+  const router = useRouter()
+  // let { id } = useParams();
 
   const openSelectedMovie = useCallback((movie: Movie) => {
-    if (String(id) !== String(movie.id)) {
-      navigate(`/search/${movie.id}`);
+      router.push(`/search/${movie.id}`);
       window.scrollTo({
         top: 0,
         left: 0,
         behavior: "smooth",
       });
-    }
-  },[movies]);
+
+    },[movies]);
 
   return (
      <div className="movies-list">

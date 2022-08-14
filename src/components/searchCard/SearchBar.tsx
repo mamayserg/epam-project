@@ -4,7 +4,7 @@ import {
 } from "../../constants/searchParams";
 import { useCallback, useEffect, useState } from "react";
 import { useQueryParam } from "../../hooks/use-query-param";
-import React , {ChangeEvent} from 'react';
+import React , { ChangeEvent } from 'react';
 
 const SearchBar = () => {
   const [searchParam, setSearchParam, allQueryParams] = useQueryParam(
