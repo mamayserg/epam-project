@@ -1,10 +1,6 @@
-<<<<<<<< HEAD:src/components/pages/errorPage/ErrorPage.js
 import Link from 'next/link'
-========
-import { Link } from "react-router-dom";
 import "./errorPage.css";
 import React from 'react';
->>>>>>>> origin/main:src/components/pages/errorPage/ErrorPage.tsx
 
 const ErrorPage = () => (
   <section className="page_404 h-full">
